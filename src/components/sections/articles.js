@@ -133,7 +133,7 @@ const Articles = () => {
           // fetch(rssFeed, { headers: { Accept: "application/json" } })
           .then(res => res.json())
           // Feed also contains comments, therefore we filter for articles only
-          .then(data => data.items.filter(item => item.categories.length > 0))
+          .then(data => data.items.filter(item => item.categories.length > -1))
           // .then(data => data.items.filter(item => item.title.length > 0))
           .then(newArticles => newArticles.slice(0, MAX_ARTICLES))
           .then(articles => setArticles(articles))
