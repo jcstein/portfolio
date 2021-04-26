@@ -5,7 +5,7 @@ module.exports = {
   siteShortTitle: "js.", // Used as logo text in header, footer, and splash screen
   siteDescription:
   "I'm a full-stack entrepreneur who specializes in lightweight, functional web design. I am currently learning build web experiences that are designed to reduce waste and help people around the globe.",
-  siteUrl: "https:/jcstein.dev/",
+  siteUrl: "jcstein.dev",
   siteLanguage: "en_US",
   siteIcon: "content/favicon.png", // Relative to gatsby-config file
   seoTitleSuffix: "Welcome to my site", // SEO title syntax will be e.g. "Imprint - {seoTitleSuffix}"
@@ -46,7 +46,7 @@ module.exports = {
   //-- ARTICLES SECTION SETTINGS -----
   // You can create your own Medium feed with this rss to json converter: https://rss2json.com/
   // To access your Medium RSS feed, just replace this url with your username: https://medium.com/feed/@jcstein}
-  mediumRssFeed: 
+  mediumRssFeed:
     "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40jcstein",
   // rssFeed: "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.theguardian.com%2Finternational%2Frss",
 
@@ -66,17 +66,16 @@ module.exports = {
     },
     {
       name: "Github",
-      url:
-        "https://github.com/jcstein",
+      url: "https://github.com/jcstein",
     },
     {
       name: "Behance",
       url: "https://www.behance.net/joshuastein",
     },
-    // {
-    //   name: "Mail",
-    //   url: "mailto:mail@konstantin.digital",
-    // },
+    {
+      name: "Mail",
+      url: "mailto:mail@jcstein.dev",
+    },
   ],
 
   //-- NAVIGATION SETTINGS -----
