@@ -5,7 +5,7 @@ module.exports = {
   siteShortTitle: "js.", // Used as logo text in header, footer, and splash screen
   siteDescription:
   "I'm a full-stack entrepreneur who specializes in lightweight, functional web design. I am currently learning build web experiences that are designed to reduce waste and help people around the globe.",
-  siteUrl: "jcstein.dev",
+  siteUrl: "https://jcstein.dev",
   siteLanguage: "en_US",
   siteIcon: "content/favicon.png", // Relative to gatsby-config file
   seoTitleSuffix: "Welcome to my site", // SEO title syntax will be e.g. "Imprint - {seoTitleSuffix}"
