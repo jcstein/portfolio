@@ -1,14 +1,14 @@
 module.exports = {
   //-- SITE SETTINGS -----
   author: "Josh Stein",
-  siteTitle: "Josh Stein's Portfolio",
+  siteTitle: "Josh Stein | Portfolio",
   siteShortTitle: "js.", // Used as logo text in header, footer, and splash screen
   siteDescription:
   "I'm a full-stack entrepreneur who specializes in lightweight, functional web design. I am currently learning build web experiences that are designed to reduce waste and help people around the globe.",
   siteUrl: "https://jcstein.dev",
   siteLanguage: "en_US",
   siteIcon: "content/favicon.png", // Relative to gatsby-config file
-  seoTitleSuffix: "Welcome to my site", // SEO title syntax will be e.g. "Imprint - {seoTitleSuffix}"
+  seoTitleSuffix: "Welcome to my portfolio", // SEO title syntax will be e.g. "Imprint - {seoTitleSuffix}"
   useCookieBar: true, // If you use Google Analytics and want to be GDPR-compliant, set it to true
   googleAnalyticsTrackingId: "G-NP4N9RF8TG", // e.g. UA-XXXXXX-X
 
