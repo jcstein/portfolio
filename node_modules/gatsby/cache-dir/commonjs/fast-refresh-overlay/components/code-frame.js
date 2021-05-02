@@ -1,40 +1,30 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.CodeFrame = CodeFrame;
+exports.default = void 0;
 
-var React = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
-function CodeFrame({
+const CodeFrame = ({
   decoded
-}) {
-  if (!decoded) {
-    return /*#__PURE__*/React.createElement("pre", {
-      "data-gatsby-overlay": "pre"
-    }, /*#__PURE__*/React.createElement("code", {
-      "data-gatsby-overlay": "pre__code"
-    }));
+}) => /*#__PURE__*/_react.default.createElement("pre", {
+  "data-gatsby-overlay": "pre"
+}, /*#__PURE__*/_react.default.createElement("code", {
+  "data-gatsby-overlay": "pre__code"
+}, decoded ? decoded.map((entry, index) => /*#__PURE__*/_react.default.createElement("span", {
+  key: `frame-${index}`,
+  "data-gatsby-overlay": "pre__code__span",
+  style: {
+    color: entry.fg ? `var(--color-${entry.fg})` : undefined,
+    ...(entry.decoration === `bold` ? {
+      fontWeight: 800
+    } : entry.decoration === `italic` ? {
+      fontStyle: `italic`
+    } : undefined)
   }
+}, entry.content)) : null));
 
-  return /*#__PURE__*/React.createElement("pre", {
-    "data-gatsby-overlay": "pre"
-  }, /*#__PURE__*/React.createElement("code", {
-    "data-gatsby-overlay": "pre__code"
-  }, decoded.map((entry, index) => {
-    const style = {
-      color: entry.fg ? `var(--color-${entry.fg})` : undefined,
-      ...(entry.decoration === `bold` ? {
-        fontWeight: 800
-      } : entry.decoration === `italic` ? {
-        fontStyle: `italic`
-      } : undefined)
-    };
-    return /*#__PURE__*/React.createElement("span", {
-      key: `frame-${index}`,
-      "data-gatsby-overlay": "pre__code__span",
-      style: style
-    }, entry.content);
-  })));
-}
+var _default = CodeFrame;
+exports.default = _default;

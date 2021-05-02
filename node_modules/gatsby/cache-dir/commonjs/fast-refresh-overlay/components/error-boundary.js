@@ -1,31 +1,39 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.ErrorBoundary = void 0;
+exports.default = void 0;
 
-var React = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
-class ErrorBoundary extends React.Component {
+class ErrorBoundary extends _react.default.Component {
   constructor(...args) {
     super(...args);
     this.state = {
-      error: null
+      hasError: false
     };
   }
 
   componentDidCatch(error) {
-    this.setState({
-      error
-    });
+    this.props.onError(error);
+  }
+
+  componentDidMount() {
+    this.props.clearErrors();
+  }
+
+  static getDerivedStateFromError() {
+    return {
+      hasError: true
+    };
   }
 
   render() {
-    // Without this check => possible infinite loop
-    return this.state.error && this.props.hasErrors ? null : this.props.children;
+    return this.state.hasError ? null : this.props.children;
   }
 
 }
 
-exports.ErrorBoundary = ErrorBoundary;
+var _default = ErrorBoundary;
+exports.default = _default;
