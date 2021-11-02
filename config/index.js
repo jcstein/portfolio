@@ -1,9 +1,9 @@
 module.exports = {
   //-- SITE SETTINGS -----
   author: "Josh Stein",
-  siteTitle: "Josh Stein | Portfolio",
-  siteShortTitle: "js.", // Used as logo text in header, footer, and splash screen
-  siteDescription: "Hi, I specialize in lightweight, functional web design. I'm currently building web experiences that are designed to reduce waste and help people around the globe.",
+  siteTitle: "Josh Stein | jcs.sol",
+  siteShortTitle: "jcs.sol", // Used as logo text in header, footer, and splash screen
+  siteDescription: "Hi, I specialize in lightweight, functional Web3 design. I'm currently building web experiences that are designed to reduce waste and help people around the globe.",
   siteUrl: "https://jcstein.dev",
   siteLanguage: "en_US",
   siteIcon: "content/favicon.png", // Relative to gatsby-config file
@@ -71,10 +71,6 @@ module.exports = {
       name: "Behance",
       url: "https://www.behance.net/joshuastein",
     },
-    {
-      name: "Mail",
-      url: "mailto:mail@jcstein.dev",
-    },
   ],
 
   //-- NAVIGATION SETTINGS -----
@@ -102,12 +98,12 @@ module.exports = {
   },
   footerLinks: [
     {
-      name: "Privacy",
-      url: "/privacy",
+      name: "Twitter",
+      url: "https://twitter.com/JoshCStein",
     },
     {
-      name: "Imprint",
-      url: "/imprint",
+      name: "Privacy",
+      url: "/privacy",
     },
   ],
 }
