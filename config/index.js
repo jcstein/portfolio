@@ -60,16 +60,16 @@ module.exports = {
       url: "https://www.linkedin.com/in/joshcstein/",
     },
     {
-      name: "Medium",
-      url: "https://medium.com/@jcstein",
-    },
-    {
       name: "Github",
       url: "https://github.com/jcstein",
     },
     {
       name: "Behance",
       url: "https://www.behance.net/joshuastein",
+    },
+    {
+      name: "Blog",
+      url: "https://blog.jcstein.dev",
     },
   ],
 
@@ -83,6 +83,10 @@ module.exports = {
       {
         name: "Projects",
         url: "/#projects",
+      },
+      {
+        name: "Blog",
+        url: "https://blog.jcstein.dev",
       },
       {
         name: "Contact",
