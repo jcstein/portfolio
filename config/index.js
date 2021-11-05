@@ -68,8 +68,8 @@ module.exports = {
       url: "https://www.behance.net/joshuastein",
     },
     {
-      name: "Blog",
-      url: "https://blog.jcstein.dev",
+      name: "Twitter",
+      url: "https://twitter.com/JoshCStein",
     },
   ],
 
@@ -102,8 +102,8 @@ module.exports = {
   },
   footerLinks: [
     {
-      name: "Twitter",
-      url: "https://twitter.com/JoshCStein",
+      name: "Blog",
+      url: "https://blog.jcstein.dev",
     },
     {
       name: "Privacy",
