@@ -86,7 +86,7 @@ module.exports = {
       },
       {
         name: "Blog",
-        url: "https://blog.jcstein.dev",
+        url: "https://mirror.xyz/joshcs.eth",
       },
       {
         name: "Contact",
@@ -103,7 +103,7 @@ module.exports = {
   footerLinks: [
     {
       name: "Blog",
-      url: "https://blog.jcstein.dev",
+      url: "https://mirror.xyz/joshcs.eth",
     },
     {
       name: "Privacy",
