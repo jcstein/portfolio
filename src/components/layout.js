@@ -10,6 +10,7 @@ import Context from "../context"
 import GlobalStyle from "../styles/globalStyle"
 import Header from "./header"
 import Footer from "./footer"
+import CookieBar from "../components/cookieBar"
 import SplashScreen from "../components/splashScreen"
 import { useCookieBar } from "../../config"
 
@@ -34,7 +35,7 @@ const Layout = ({ children }) => {
   const theme = darkModeEnabled ? darkTheme : lightTheme
 
   return (
-    <StyledLayoutWrapper>
+    <StyledLayoutWrapper id="layout-wrapper" data-useCookieBar={useCookieBar}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         {isIntroDone ? (
@@ -46,6 +47,7 @@ const Layout = ({ children }) => {
         ) : (
           <SplashScreen />
         )}
+      {useCookieBar && <CookieBar />}
       </ThemeProvider>
     </StyledLayoutWrapper>
   )
