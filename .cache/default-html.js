@@ -11,6 +11,7 @@ export default function HTML(props) {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
+        <script defer data-domain="jcstein.dev" src="https://plausible.io/js/plausible.js"></script>
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes}>
