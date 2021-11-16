@@ -64,6 +64,10 @@ module.exports = {
       url: "https://github.com/jcstein",
     },
     {
+      name: "Calendly",
+      url: "https://calendly.com/jcstein",
+    },
+    {
       name: "Behance",
       url: "https://www.behance.net/joshuastein",
     },
@@ -83,6 +87,10 @@ module.exports = {
       {
         name: "Projects",
         url: "/#projects",
+      },
+      {
+        name: "Schedule",
+        url: "https://calendly.com/jcstein",
       },
       {
         name: "Blog",
