@@ -94,13 +94,13 @@ const Contact = ({ content }) => {
           </div>
         </div>
         <Social width="9rem" padding="0.5rem 1.25rem" withIcon />
+        <script
+          type="text/javascript"
+          src="https://buymeacryptocoffee.xyz/buttonwidget.js"
+          data-address="0x186ea56f0a40c5593a697b3e804968b8c5920ff3"
+          data-name="crypto-coffee-button"
+        ></script>
       </StyledContentWrapper>
-      <script
-        type="text/javascript"
-        src="https://buymeacryptocoffee.xyz/buttonwidget.js"
-        data-address="0x186ea56f0a40c5593a697b3e804968b8c5920ff3"
-        data-name="crypto-coffee-button"
-      ></script>
     </StyledSection>
   )
 }
