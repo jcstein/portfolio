@@ -107,10 +107,10 @@ module.exports = {
         url: "/#contact",
       },
       {
-        name: "Crypto Coffee",
-        url:
-          "https://www.buymeacryptocoffee.xyz/0x186ea56f0a40c5593a697b3e804968b8c5920ff3",
-      },
+      //   name: "Crypto Coffee",
+      //   url:
+      //     "https://www.buymeacryptocoffee.xyz/0x186ea56f0a40c5593a697b3e804968b8c5920ff3",
+      // },
     ],
     button: {
       useFileName: true,
