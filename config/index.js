@@ -65,10 +65,6 @@ module.exports = {
       url: "https://github.com/jcstein",
     },
     {
-      name: "Calendly",
-      url: "https://calendly.com/jcstein",
-    },
-    {
       name: "Crypto Coffee",
       url:
         "https://www.buymeacryptocoffee.xyz/0x186ea56f0a40c5593a697b3e804968b8c5920ff3",
@@ -95,10 +91,6 @@ module.exports = {
         url: "/#projects",
       },
       {
-        name: "Schedule",
-        url: "https://calendly.com/jcstein",
-      },
-      {
         name: "Blog",
         url: "https://blog.jcstein.dev",
       },
@@ -106,11 +98,11 @@ module.exports = {
         name: "Contact",
         url: "/#contact",
       },
-      //{
-      //   name: "Crypto Coffee",
-      //   url:
-      //     "https://www.buymeacryptocoffee.xyz/0x186ea56f0a40c5593a697b3e804968b8c5920ff3",
-      // },
+      {
+        name: "Crypto Coffee",
+        url:
+          "https://www.buymeacryptocoffee.xyz/0x186ea56f0a40c5593a697b3e804968b8c5920ff3",
+      },
     ],
     button: {
       useFileName: true,
