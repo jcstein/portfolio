@@ -2,8 +2,8 @@ import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 import styled from "styled-components"
-import { MDXRenderer } from "gatsby-plugin-mdx"
 
+import PrivacyContent from "../../content/privacy/privacy.mdx"
 import GlobalStateProvider from "../context/provider"
 import ContentWrapper from "../styles/contentWrapper"
 import Layout from "../components/layout"
@@ -40,8 +40,8 @@ const StyledContentWrapper = styled(ContentWrapper)`
 `
 
 const Privacy = ({ data }) => {
-  const { body, frontmatter } = data.privacy.edges[0].node
-  const { title, seoTitle, useSeoTitleSuffix, useSplashScreen } = frontmatter
+  const { frontmatter } = data.privacy.edges[0].node
+  const { title, useSplashScreen } = frontmatter
 
   const globalState = {
     isIntroDone: useSplashScreen ? false : true,
@@ -51,18 +51,10 @@ const Privacy = ({ data }) => {
   return (
     <GlobalStateProvider initialState={globalState}>
       <Layout>
-        <SEO
-          title={
-            useSeoTitleSuffix
-              ? `${seoTitle} - ${seoTitleSuffix}`
-              : `${seoTitle}`
-          }
-          meta={[{ name: "robots", content: "noindex" }]}
-        />
         <StyledSection id={title}>
           <StyledContentWrapper>
             <h1 data-testid="heading">{title}</h1>
-            <MDXRenderer>{body}</MDXRenderer>
+            <PrivacyContent />
           </StyledContentWrapper>
         </StyledSection>
       </Layout>
@@ -76,7 +68,6 @@ Privacy.propTypes = {
       edges: PropTypes.arrayOf(
         PropTypes.shape({
           node: PropTypes.shape({
-            body: PropTypes.string.isRequired,
             frontmatter: PropTypes.object.isRequired,
           }).isRequired,
         }).isRequired
@@ -87,12 +78,31 @@ Privacy.propTypes = {
 
 export default Privacy
 
+export const Head = ({ data }) => {
+  const { frontmatter } = data.privacy.edges[0].node
+  const { seoTitle, useSeoTitleSuffix } = frontmatter
+
+  return (
+    <SEO
+      title={
+        useSeoTitleSuffix ? `${seoTitle} - ${seoTitleSuffix}` : `${seoTitle}`
+      }
+      meta={[{ name: "robots", content: "noindex" }]}
+    />
+  )
+}
+
+Head.propTypes = {
+  data: PropTypes.object.isRequired,
+}
+
 export const pageQuery = graphql`
   {
-    privacy: allMdx(filter: { fileAbsolutePath: { regex: "/privacy/" } }) {
+    privacy: allMdx(
+      filter: { internal: { contentFilePath: { regex: "/privacy/" } } }
+    ) {
       edges {
         node {
-          body
           frontmatter {
             title
             seoTitle

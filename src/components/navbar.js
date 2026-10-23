@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 
 import { navLinks } from "../../config"
+import Anchor from "./anchor"
 
 const StyledNav = styled.nav`
   display: none;
@@ -59,9 +60,9 @@ const Navbar = () => {
     <StyledNav>
       {menu.map(({ name, url }, key) => {
         return (
-          <Link className="nav-link" key={key} to={url}>
+          <Anchor className="nav-link" key={key} to={url}>
             {name}
-          </Link>
+          </Anchor>
         )
       })}
       {button.useFileName ? (

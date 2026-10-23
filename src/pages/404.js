@@ -37,10 +37,6 @@ const NotFoundPage = () => {
   return (
     <GlobalStateProvider initialState={globalState}>
       <Layout>
-        <SEO
-          title="404: Not found"
-          meta={[{ name: "robots", content: "noindex" }]}
-        />
         <StyledSection>
           <StyledContentWrapper>
             <h1 data-testid="heading">NOT FOUND</h1>
@@ -53,3 +49,7 @@ const NotFoundPage = () => {
 }
 
 export default NotFoundPage
+
+export const Head = () => (
+  <SEO title="404: Not found" meta={[{ name: "robots", content: "noindex" }]} />
+)

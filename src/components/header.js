@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react"
 import { Link } from "gatsby"
-import Helmet from "react-helmet"
 import styled from "styled-components"
 import { motion, useAnimation } from "framer-motion"
 
@@ -11,11 +10,11 @@ import Logo from "./logo"
 import Sidebar from "./sidebar"
 import Navbar from "./navbar"
 
-const StyledHeader = motion.custom(styled.header`
+const StyledHeader = styled(motion.header)`
   width: 100%;
   height: ${({ theme }) => theme.headerHeight};
   background: ${({ theme }) => theme.colors.background};
-`)
+`
 
 const StyledContentWrapper = styled(ContentWrapper)`
   && {
@@ -97,6 +96,11 @@ const Header = () => {
       controls.start({ opacity: 1, y: 0, transition: { delay: 0.2 } })
   }, [isIntroDone, controls])
 
+  useEffect(() => {
+    document.body.classList.toggle("blur", open)
+    return () => document.body.classList.remove("blur")
+  }, [open])
+
   let navigation
   if (detectMobileAndTablet(windowWidth)) {
     navigation = (
@@ -119,8 +123,6 @@ const Header = () => {
 
   return (
     <StyledHeader initial={{ opacity: 0, y: -10 }} animate={controls}>
-      {/* add blur class to body when sidebar is opened */}
-      <Helmet bodyAttributes={{ class: open ? "blur" : "" }} />
       <StyledContentWrapper>
         <Link to="/" aria-label="home">
           <Logo color="primary" size="2rem" />

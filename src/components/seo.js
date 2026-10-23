@@ -1,12 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
-import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 import ogImageDefault from "../../content/default.jpg"
 
 import { lightTheme } from "../styles/theme"
 
-const SEO = ({ description, lang, meta, title }) => {
+const SEO = ({ description = ``, lang = `en`, meta = [], title }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -26,77 +25,47 @@ const SEO = ({ description, lang, meta, title }) => {
   const ogImageUrl = site.siteMetadata.siteUrl + ogImageDefault
 
   return (
-    <Helmet
-      htmlAttributes={{
-        lang,
-      }}
-      title={title}
-      titleTemplate={`%s`}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:site_name`,
-          content: title,
-        },
-        {
-          property: `og:image`,
-          content: ogImageUrl,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata.author,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-        {
-          name: `msapplication-TileColor`,
-          content: lightTheme.colors.primary,
-        },
-        {
-          name: `theme-color`,
-          content: lightTheme.colors.primary,
-        },
-      ].concat(meta)}
-    />
+    <>
+      <html lang={lang} />
+      <title>{title}</title>
+      <meta name="description" content={metaDescription} />
+      <meta property="og:title" content={title} />
+      <meta property="og:site_name" content={title} />
+      <meta property="og:image" content={ogImageUrl} />
+      <meta property="og:description" content={metaDescription} />
+      <meta property="og:type" content="website" />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:creator" content={site.siteMetadata.author} />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={metaDescription} />
+      <meta
+        name="msapplication-TileColor"
+        content={lightTheme.colors.primary}
+      />
+      <meta name="theme-color" content={lightTheme.colors.primary} />
+      {meta.map(item => (
+        <meta
+          key={`${item.name || item.property}:${item.content}`}
+          name={item.name}
+          property={item.property}
+          content={item.content}
+        />
+      ))}
+    </>
   )
 }
 
 SEO.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
-  meta: PropTypes.array,
+  meta: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      property: PropTypes.string,
+      content: PropTypes.string,
+    })
+  ),
   lang: PropTypes.string,
-}
-
-SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
 }
 
 export default SEO

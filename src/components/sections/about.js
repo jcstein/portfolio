@@ -1,9 +1,10 @@
 import React, { useRef, useContext, useEffect } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
-import Img from "gatsby-image"
-import { MDXRenderer } from "gatsby-plugin-mdx"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { motion, useAnimation } from "framer-motion"
+
+import AboutContent from "../../../content/index/about/about.mdx"
 
 import { useOnScreen } from "../../hooks/"
 import Context from "../../context/"
@@ -63,7 +64,8 @@ const StyledContentWrapper = styled(ContentWrapper)`
 `
 
 const About = ({ content }) => {
-  const { frontmatter, body } = content[0].node
+  const { frontmatter } = content[0].node
+  const image = getImage(frontmatter.image)
   const { isIntroDone } = useContext(Context).state
   const tControls = useAnimation()
   const iControls = useAnimation()
@@ -95,7 +97,7 @@ const About = ({ content }) => {
         >
           <h3 className="section-title">{frontmatter.title}</h3>
           <div className="text-content">
-            <MDXRenderer>{body}</MDXRenderer>
+            <AboutContent />
           </div>
         </motion.div>
         <motion.div
@@ -104,10 +106,13 @@ const About = ({ content }) => {
           initial={{ opacity: 0, x: 20 }}
           animate={iControls}
         >
-          <Img
-            className="about-author"
-            fluid={frontmatter.image.childImageSharp.fluid}
-          />
+          {image ? (
+            <GatsbyImage
+              className="about-author"
+              image={image}
+              alt="Josh Stein"
+            />
+          ) : null}
         </motion.div>
       </StyledContentWrapper>
     </StyledSection>
@@ -118,7 +123,6 @@ About.propTypes = {
   content: PropTypes.arrayOf(
     PropTypes.shape({
       node: PropTypes.shape({
-        body: PropTypes.string.isRequired,
         frontmatter: PropTypes.object.isRequired,
       }).isRequired,
     }).isRequired

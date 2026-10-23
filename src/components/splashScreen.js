@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from "react"
 import styled from "styled-components"
-import Helmet from "react-helmet"
 import { motion, useAnimation } from "framer-motion"
 
 import { lightTheme, darkTheme } from "../styles/theme"
@@ -55,16 +54,21 @@ const SplashScreen = () => {
     sequence()
   }, [backgroundControls, backdropControls, setState, state])
 
+  useEffect(() => {
+    if (!state.isIntroDone) {
+      document.body.classList.add("splashScreen")
+    } else {
+      document.body.classList.remove("splashScreen")
+    }
+    return () => document.body.classList.remove("splashScreen")
+  }, [state.isIntroDone])
+
   return (
     <StyledSplashScreen
       initial={{ opacity: 0 }}
       animate={backgroundControls}
       darkMode={state.darkMode}
     >
-      {/* Add splashScreen class to body (prevents scrolling during splashScreen) */}
-      <Helmet
-        bodyAttributes={{ class: !state.isIntroDone ? "splashScreen" : "" }}
-      />
       <div className="logo-wrapper">
         <motion.div
           className="backdrop"

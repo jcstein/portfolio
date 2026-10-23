@@ -7,7 +7,7 @@ import { motion, useAnimation } from "framer-motion"
 
 import Context from "../context/"
 
-const StyledCookieBar = motion.custom(styled.div`
+const StyledCookieBar = styled(motion.div)`
   position: fixed;
   left: 0;
   bottom: 1rem;
@@ -58,7 +58,7 @@ const StyledCookieBar = motion.custom(styled.div`
     border: none;
     margin: 0;
   }
-`)
+`
 
 const CookieBar = () => {
   const location = useLocation()

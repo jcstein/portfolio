@@ -2,6 +2,8 @@ import React, { useContext } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 
+import Anchor from "./anchor"
+
 import ContentWrapper from "../styles/contentWrapper"
 import Context from "../context"
 import Logo from "./logo"
@@ -37,7 +39,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
   }
 `
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(Anchor)`
   font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;

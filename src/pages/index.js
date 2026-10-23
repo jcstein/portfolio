@@ -15,7 +15,7 @@ import { seoTitleSuffix } from "../../config"
 
 const IndexPage = ({ data }) => {
   const { frontmatter } = data.index.edges[0].node
-  const { seoTitle, useSeoTitleSuffix, useSplashScreen } = frontmatter
+  const { useSplashScreen } = frontmatter
 
   const globalState = {
     // if useSplashScreen=false, we skip the intro by setting isIntroDone=true
@@ -28,13 +28,6 @@ const IndexPage = ({ data }) => {
   return (
     <GlobalStateProvider initialState={globalState}>
       <Layout>
-        <SEO
-          title={
-            useSeoTitleSuffix
-              ? `${seoTitle} - ${seoTitleSuffix}`
-              : `${seoTitle}`
-          }
-        />
         <Hero content={data.hero.edges} />
         {/* Articles is populated via Medium RSS Feed fetch
         <Articles /> */}
@@ -53,9 +46,28 @@ IndexPage.propTypes = {
 
 export default IndexPage
 
+export const Head = ({ data }) => {
+  const { frontmatter } = data.index.edges[0].node
+  const { seoTitle, useSeoTitleSuffix } = frontmatter
+
+  return (
+    <SEO
+      title={
+        useSeoTitleSuffix ? `${seoTitle} - ${seoTitleSuffix}` : `${seoTitle}`
+      }
+    />
+  )
+}
+
+Head.propTypes = {
+  data: PropTypes.object.isRequired,
+}
+
 export const pageQuery = graphql`
   {
-    index: allMdx(filter: { fileAbsolutePath: { regex: "/index/index/" } }) {
+    index: allMdx(
+      filter: { internal: { contentFilePath: { regex: "/index/index.mdx/" } } }
+    ) {
       edges {
         node {
           frontmatter {
@@ -66,10 +78,11 @@ export const pageQuery = graphql`
         }
       }
     }
-    hero: allMdx(filter: { fileAbsolutePath: { regex: "/index/hero/" } }) {
+    hero: allMdx(
+      filter: { internal: { contentFilePath: { regex: "/index/hero/" } } }
+    ) {
       edges {
         node {
-          body
           frontmatter {
             greetings
             title
@@ -77,26 +90,33 @@ export const pageQuery = graphql`
             subtitle
             icon {
               childImageSharp {
-                fluid(maxWidth: 60, quality: 90) {
-                  ...GatsbyImageSharpFluid
-                }
+                gatsbyImageData(
+                  width: 60
+                  quality: 90
+                  layout: CONSTRAINED
+                  placeholder: BLURRED
+                )
               }
             }
           }
         }
       }
     }
-    about: allMdx(filter: { fileAbsolutePath: { regex: "/index/about/" } }) {
+    about: allMdx(
+      filter: { internal: { contentFilePath: { regex: "/index/about/" } } }
+    ) {
       edges {
         node {
-          body
           frontmatter {
             title
             image {
               childImageSharp {
-                fluid(maxWidth: 400, quality: 90) {
-                  ...GatsbyImageSharpFluid
-                }
+                gatsbyImageData(
+                  width: 400
+                  quality: 90
+                  layout: CONSTRAINED
+                  placeholder: BLURRED
+                )
               }
             }
           }
@@ -104,39 +124,43 @@ export const pageQuery = graphql`
       }
     }
     interests: allMdx(
-      filter: { fileAbsolutePath: { regex: "/index/interests/" } }
+      filter: { internal: { contentFilePath: { regex: "/index/interests/" } } }
     ) {
       edges {
         node {
-          exports {
+          frontmatter {
+            title
             shownItems
             interests {
               name
               icon {
                 childImageSharp {
-                  fixed(width: 20, height: 20, quality: 90) {
-                    ...GatsbyImageSharpFixed
-                  }
+                  gatsbyImageData(
+                    width: 20
+                    height: 20
+                    quality: 90
+                    layout: FIXED
+                    placeholder: BLURRED
+                  )
                 }
               }
             }
-          }
-          frontmatter {
-            title
           }
         }
       }
     }
     projects: allMdx(
       filter: {
-        fileAbsolutePath: { regex: "/index/projects/" }
+        internal: { contentFilePath: { regex: "/index/projects/" } }
         frontmatter: { visible: { eq: true } }
       }
-      sort: { fields: [frontmatter___position], order: ASC }
+      sort: { frontmatter: { position: ASC } }
     ) {
       edges {
         node {
-          body
+          internal {
+            contentFilePath
+          }
           frontmatter {
             title
             category
@@ -145,9 +169,12 @@ export const pageQuery = graphql`
             github
             screenshot {
               childImageSharp {
-                fluid(maxWidth: 400, quality: 90) {
-                  ...GatsbyImageSharpFluid
-                }
+                gatsbyImageData(
+                  width: 400
+                  quality: 90
+                  layout: CONSTRAINED
+                  placeholder: BLURRED
+                )
               }
             }
             tags
@@ -160,20 +187,22 @@ export const pageQuery = graphql`
       }
     }
     contact: allMdx(
-      filter: { fileAbsolutePath: { regex: "/index/contact/" } }
+      filter: { internal: { contentFilePath: { regex: "/index/contact/" } } }
     ) {
       edges {
         node {
-          body
           frontmatter {
             title
             name
             email
             profileImage {
               childImageSharp {
-                fluid(maxWidth: 400, quality: 90) {
-                  ...GatsbyImageSharpFluid
-                }
+                gatsbyImageData(
+                  width: 400
+                  quality: 90
+                  layout: CONSTRAINED
+                  placeholder: BLURRED
+                )
               }
             }
           }
