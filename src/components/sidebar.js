@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 
 import { navLinks } from "../../config"
+import Anchor from "./anchor"
 
 const StyledBackdrop = styled.div`
   position: fixed;
@@ -79,14 +80,14 @@ const Sidebar = ({ open, setOpen }) => {
       <StyledContainer open={open} aria-hidden={!open} tabIndex={open ? 1 : -1}>
         <StyledNav>
           {menu.map(({ name, url }, key) => (
-            <Link
+            <Anchor
               className="nav-link"
               key={key}
               to={url}
               onClick={() => setOpen(!open)}
             >
               {name}
-            </Link>
+            </Anchor>
           ))}
           {button.useFileName ? (
             <a

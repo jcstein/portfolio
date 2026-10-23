@@ -10,6 +10,7 @@ const {
 } = require(`./config`)
 
 module.exports = {
+  trailingSlash: "never",
   siteMetadata: {
     author: author,
     title: siteTitle,
@@ -17,14 +18,12 @@ module.exports = {
     siteUrl: siteUrl,
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-image`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-robots-txt`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-offline`,
-    `gatsby-plugin-netlify`,
     {
       resolve: `gatsby-plugin-gdpr-cookies`,
       options: {
@@ -34,19 +33,14 @@ module.exports = {
           anonymize: true,
           allowAdFeatures: false,
         },
-        environments: ["production"], // defines the environments where the tracking should be available
+        environments: ["production"],
       },
     },
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: `gatsby-source-filesystem`,
       options: {
-        name: siteTitle,
-        short_name: siteShortTitle,
-        start_url: `/`,
-        background_color: colors.lightTheme.background,
-        theme_color: colors.lightTheme.primary,
-        display: `standalone`,
-        icon: siteIcon, // This path is relative to the root of the site.
+        path: `${__dirname}/content`,
+        name: `content`,
       },
     },
     {
@@ -65,23 +59,17 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: `gatsby-plugin-manifest`,
       options: {
-        path: `${__dirname}/content`,
-        name: `content`,
+        name: siteTitle,
+        short_name: siteShortTitle,
+        start_url: `/`,
+        background_color: colors.lightTheme.background,
+        theme_color: colors.lightTheme.primary,
+        display: `standalone`,
+        icon: siteIcon,
       },
     },
-    {
-      resolve: `gatsby-plugin-eslint`,
-      options: {
-        test: /\.js$|\.jsx$/,
-        exclude: /(node_modules|.cache|public)/,
-        stages: [`develop`],
-        options: {
-          emitWarning: true,
-          failOnError: false,
-        },
-      },
-    },
+    `gatsby-plugin-offline`,
   ],
 }

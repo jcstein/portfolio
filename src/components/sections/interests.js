@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
-import Img from "gatsby-image"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { motion, useAnimation } from "framer-motion"
 
 import { detectMobileAndTablet, isSSR } from "../../utils"
@@ -111,8 +111,8 @@ const StyledInterests = styled.div`
 `
 
 const Interests = ({ content }) => {
-  const { exports, frontmatter } = content[0].node
-  const { shownItems, interests } = exports
+  const { frontmatter } = content[0].node
+  const { shownItems, interests } = frontmatter
 
   const [shownInterests, setShownInterests] = useState(shownItems)
 
@@ -162,7 +162,10 @@ const Interests = ({ content }) => {
               initial={{ opacity: 0, scaleY: 0 }}
               animate={iControls}
             >
-              <Img className="icon" fixed={icon.childImageSharp.fixed} /> {name}
+              {getImage(icon) ? (
+                <GatsbyImage className="icon" image={getImage(icon)} alt="" />
+              ) : null}{" "}
+              {name}
             </motion.div>
           ))}
           {shownInterests < interests.length && (
@@ -186,11 +189,11 @@ Interests.propTypes = {
   content: PropTypes.arrayOf(
     PropTypes.shape({
       node: PropTypes.shape({
-        exports: PropTypes.shape({
-          interests: PropTypes.array.isRequired,
+        frontmatter: PropTypes.shape({
+          title: PropTypes.string,
           shownItems: PropTypes.number.isRequired,
+          interests: PropTypes.array.isRequired,
         }).isRequired,
-        frontmatter: PropTypes.object.isRequired,
       }).isRequired,
     }).isRequired
   ).isRequired,

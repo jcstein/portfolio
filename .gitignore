@@ -1,0 +1,9 @@
+# dependencies
+node_modules/
+
+# Gatsby build output and cache
+.cache/
+public/
+
+# OS
+.DS_Store

@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef, useContext } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
-import { MDXRenderer } from "gatsby-plugin-mdx"
-import Img from "gatsby-image"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import VisibilitySensor from "react-visibility-sensor"
 import { motion } from "framer-motion"
+
+import ProjectBody from "../projectBody"
 
 import { useOnScreen } from "../../hooks"
 import Context from "../../context"
@@ -269,7 +270,8 @@ const Projects = ({ content }) => {
         </motion.div>
         <div className="projects">
           {projects.map((project, key) => {
-            const { body, frontmatter } = project.node
+            const { frontmatter } = project.node
+            const screenshot = getImage(frontmatter.screenshot)
             return (
               <VisibilitySensor
                 key={key}
@@ -289,7 +291,9 @@ const Projects = ({ content }) => {
                       {frontmatter.emoji} {frontmatter.category}
                     </div>
                     <div className="title">{frontmatter.title}</div>
-                    <MDXRenderer>{body}</MDXRenderer>
+                    <ProjectBody
+                      contentFilePath={project.node.internal.contentFilePath}
+                    />
                     <div className="tags">
                       {frontmatter.tags.map(tag => (
                         <Underlining key={tag} highlight>
@@ -338,10 +342,13 @@ const Projects = ({ content }) => {
                   <VisibilitySensor
                     onChange={() => setVisibleProject(frontmatter.position)}
                   >
-                    <Img
-                      className="screenshot"
-                      fluid={frontmatter.screenshot.childImageSharp.fluid}
-                    />
+                    {screenshot ? (
+                      <GatsbyImage
+                        className="screenshot"
+                        image={screenshot}
+                        alt={frontmatter.title}
+                      />
+                    ) : null}
                   </VisibilitySensor>
                 </StyledProject>
               </VisibilitySensor>
@@ -373,7 +380,9 @@ Projects.propTypes = {
   content: PropTypes.arrayOf(
     PropTypes.shape({
       node: PropTypes.shape({
-        body: PropTypes.string.isRequired,
+        internal: PropTypes.shape({
+          contentFilePath: PropTypes.string,
+        }),
         frontmatter: PropTypes.object.isRequired,
       }).isRequired,
     }).isRequired

@@ -1,9 +1,10 @@
 import React, { useEffect, useContext } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
-import Img from "gatsby-image"
-import { MDXRenderer } from "gatsby-plugin-mdx"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { motion, useAnimation } from "framer-motion"
+
+import HeroContent from "../../../content/index/hero/hero.mdx"
 
 import Context from "../../context/"
 import ContentWrapper from "../../styles/contentWrapper"
@@ -60,10 +61,11 @@ const StyledContentWrapper = styled(ContentWrapper)`
   }
 `
 
-const AnimatedUnderlining = motion.custom(Underlining)
+const AnimatedUnderlining = motion(Underlining)
 
 const Hero = ({ content }) => {
-  const { frontmatter, body } = content[0].node
+  const { frontmatter } = content[0].node
+  const icon = getImage(frontmatter.icon)
   const { isIntroDone, darkMode } = useContext(Context).state
 
   // Controls to orchestrate animations of greetings, emoji, social profiles, underlining
@@ -78,7 +80,7 @@ const Hero = ({ content }) => {
       if (isIntroDone) {
         eControls.start({
           rotate: [0, -10, 12, -10, 9, 0, 0, 0, 0, 0, 0],
-          transition: { duration: 2.5, loop: 3, repeatDelay: 1 },
+          transition: { duration: 2.5, repeat: 3, repeatDelay: 1 },
         })
         await gControls.start({
           opacity: 1,
@@ -116,10 +118,9 @@ const Hero = ({ content }) => {
                 animate={eControls}
                 style={{ originX: 0.7, originY: 0.7 }}
               >
-                <Img
-                  className="emoji"
-                  fluid={frontmatter.icon.childImageSharp.fluid}
-                />
+                {icon ? (
+                  <GatsbyImage className="emoji" image={icon} alt="" />
+                ) : null}
               </motion.div>
             </div>
             {frontmatter.title}
@@ -131,7 +132,7 @@ const Hero = ({ content }) => {
             </AnimatedUnderlining>
           </h2>
           <div className="description">
-            <MDXRenderer>{body}</MDXRenderer>
+            <HeroContent />
           </div>
         </motion.div>
         <motion.div initial={{ opacity: 0, x: 20 }} animate={sControls}>
@@ -146,7 +147,6 @@ Hero.propTypes = {
   content: PropTypes.arrayOf(
     PropTypes.shape({
       node: PropTypes.shape({
-        body: PropTypes.string.isRequired,
         frontmatter: PropTypes.object.isRequired,
       }).isRequired,
     }).isRequired
